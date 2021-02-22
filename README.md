@@ -1,9 +1,12 @@
 # AngularTruffleExample
 Example integration between Angular and Truffle
 
-# Client / Frontend Setup
+## Quick Start
 
 The first thing is to install the client node packages.
 
-```npm install```
+```
+cd client
+npm install
+```
 
