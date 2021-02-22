@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 declare let require: any;
 declare let window: any;
 const Web3 = require('web3');
-const tokenABI = require('../../../../../../Blockchain/build/contracts/MetaCoin.json');
+const tokenABI = require('../../../../../build/contracts/MetaCoin.json');
 const contract = require('@truffle/contract');
 
 const provider = new Web3.providers.HttpProvider("http://127.0.0.1:7545");
