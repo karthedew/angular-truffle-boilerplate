@@ -1,0 +1,17 @@
+.title-toolbar {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-nav-list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

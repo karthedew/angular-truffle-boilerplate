@@ -13,7 +13,7 @@ const contract = require('@truffle/contract');
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'web3front';
+  title = 'angular-truffle-boilerplate';
 
   ammount: any;
   account: any;
@@ -38,25 +38,4 @@ export class AppComponent {
 
   }
 
-
-  // getEtherBalance(account: string) {
-
-  //   return new Promise( function ethBalance (resolve, reject) {
-  //     let deployed;
-
-  //     const MetaContract = contract(tokenABI);
-
-  //     MetaContract.setProvider(this.web3);
-
-  //     this.MetaContract.deployed().then(function resolver(instance) {
-  //       deployed = instance;
-  //       return instance.getBalanceInEth.call(account)
-  //     }).then((result) => {
-  //       console.log(result)
-  //       return resolve(result)
-  //     }).catch(err => {
-  //       reject(err);
-  //     })
-  //   })
-  // }
 }
