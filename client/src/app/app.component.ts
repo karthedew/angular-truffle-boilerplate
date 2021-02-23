@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Web3serviceService } from "./services/web3/web3service.service";
+import { Web3serviceService } from "./core/services/web3/web3service.service";
 
 declare let require: any;
 declare let window: any;

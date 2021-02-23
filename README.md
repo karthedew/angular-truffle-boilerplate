@@ -28,4 +28,4 @@ The problem stems from the *browser.js* file in the @angular-devkit. The solutio
     1. Open the file 
         i. ( <v11 ) node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js
         ii. ( v11 ) node_modules/@angular-devkit/build-angular/src/webpack/configs/browser.js
-    2. Change node: false to node: { crypto: true, stream: true }
+    2. Change " node: false " to " node: { crypto: true, stream: true } "

@@ -1,5 +1,8 @@
 build/*
 node_modules/
+.env
+.vscode
+package-lock.json
 
 # CLIENT IGNORED FILES
 client/node_modules/
