@@ -3,9 +3,27 @@
         <h1>Angular Truffle Boilerplate</h1>
 
         <!-- Put the Wallet Connect Here -->
-        <div>
-            <h2>The other side of the line</h2>
-            <button mat-flat-button color="primary" (click)="connectWallet()">Connect Wallet</button>
+        <div *ngIf="!loggedIn">
+            <button 
+              mat-flat-button
+              color="primary"
+              (click)="connectWallet()">
+                Connect Wallet
+            </button>
+        </div>
+
+        <div *ngIf="loggedIn" class="loggedin-info">
+            <div class="item">
+                Kovan
+            </div>
+
+            <div class="toolbar-address item" (click)="copyAddress()">
+                <div [cdkCopyToClipboard]="currentAddress">
+                    {{ currentAddress }}
+                </div>
+            </div>
+
+            <!-- <button mat-raised-button (click)="logout()" class="item" color="accent">Disconnect</button> -->
         </div>
         
     </mat-toolbar-row>

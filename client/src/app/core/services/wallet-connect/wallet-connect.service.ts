@@ -25,26 +25,28 @@ require("dotenv").config()
 export class WalletConnectService {
 
   private web3js: any;
-  private provider: any;
+  public provider: any;
   private accounts: any;
 
-  web3Modal: Web3Modal;
+  public web3Modal: Web3Modal;
 
 
   // --- SUBJECTS & BEHAVIOR SUBJECTS ---
-  private accountStatusSource = new Subject<any>();
-  private isConnectedSource = new BehaviorSubject<any>(false);
+  private accountStatusSource   = new Subject<any>();
+  private isConnectedSource     = new BehaviorSubject<any>(false);
+  private walletAccountsSource  = new BehaviorSubject<any>(['']);
+  private currentProviderSource = new BehaviorSubject<any>('');
 
   // --- OBSERVABLES to BEHAVIOR SUBJECTS ---
   // We want to omit the "next value" to everything that is subscribed to it.
-  public accountStatus$ = this.accountStatusSource.asObservable();
-  public isConnected$ = this.isConnectedSource.asObservable();
+  public accountStatus$   = this.accountStatusSource.asObservable();
+  public isConnected$     = this.isConnectedSource.asObservable();
+  public walletAccounts$  = this.walletAccountsSource.asObservable();
+  public currentProvider$ = this.currentProviderSource.asObservable();
 
   
 
   constructor() {
-
-    console.log('The Account Status Source: ', this.accountStatusSource)
 
     const providerOptions = {
       walletconnect: {
@@ -56,8 +58,8 @@ export class WalletConnectService {
     };
 
     this.web3Modal = new Web3Modal({
-      network: "mainnet",   // optional
-      cacheProvider: true,  // optional
+      // network: "mainnet",   // optional
+      // cacheProvider: true,  // optional
       providerOptions,      // required
       theme: {
         background: "rgb(39, 49, 56)",
@@ -74,36 +76,81 @@ export class WalletConnectService {
   // --- PUBLIC METHODS ---
   // ======================
 
-  async connectAccount() {
-
-    console.log('The INFURA_ID: ', environment.INFURA_ID)
+  public async connectAccount(): Promise<void> {
     this.web3Modal.clearCachedProvider();
 
+    // --- Connect the Provider ---
     this.provider = await this.web3Modal.connect();
     this.web3js   = new Web3(this.provider);
+
+    // --- Connect the Account(s) ---
     this.accounts = await this.web3js.eth.getAccounts();
+
+    // --- Update Sources / Behavior Subjects ---
     this.accountStatusSource.next(this.accounts);
-    console.log('The Account Status Source: ', this.accountStatusSource)
+    this.isConnectedSource.next(true);
+    this.walletAccountsSource.next(this.accounts);
   }
 
-  public async checkMetaMaskConnection() {
+  public async checkMetaMaskConnection(): Promise<void> {
     let web3: any;
 
-    if ((window as any).ethereum) {
+    // --- Check if ethereum or web3 is injected ---
+    if (window.ethereum) {
       web3 = new Web3(window.ethereum);
     } else if (window.web3) {
       web3 = new Web3(window.web3.currentProvider);
     }
 
+    // --- Get the Accounts from the login ---
     web3.eth.getAccounts()
       .then(async (addr: string) => {
-        console.log('The User address: ', addr)
+        // Check if address exists.
+        if (addr.length != 0) {
+          this.walletAccountsSource.next(addr);
+          this.isConnectedSource.next(true);
+        }
+        
       })
   }
 
   
-  public GetAccounts() {
-    return this.accounts
+  public async logout() {
+    await this.web3Modal.clearCachedProvider(); 
+    this.isConnectedSource.next(false);
+  }
+
+
+
+  // ======================
+  // --- PUBLIC METHODS ---
+  // ======================
+
+  private getProviderName(chainId: string): string {
+
+    if (chainId == '0x1') {
+      return 'Ethereum'
+    }
+
+    if (chainId == '0x3') {
+      return 'Ropsten'
+    }
+
+    if (chainId == '0x4') {
+      return 'Rinkeby'
+    }
+
+    if (chainId == '0x5') {
+      return 'Goerli'
+    }
+
+    if (chainId == '0x2a') {
+      return 'Kovan'
+    }
+
+    else {
+      return 'unknown'
+    }
   }
   
 

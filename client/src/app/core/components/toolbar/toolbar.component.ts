@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalletConnectService } from '../../services/wallet-connect/wallet-connect.service';
 
 import Web3Modal from "web3modal";
+import Web3 from 'web3';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,19 +11,38 @@ import Web3Modal from "web3modal";
 })
 export class ToolbarComponent implements OnInit {
 
+  // --- Local Variables ---
+  loggedIn:       boolean = false;
+  currentAddress: string;
+
   constructor(
     private walletConnectService: WalletConnectService
-  ) { }
-
-  ngOnInit(): void {
-    let accnts = this.walletConnectService.GetAccounts();
-
-    console.log('The available accounts: ', accnts)
+  ) {
+    // --- Check MetaMask Login ---
+    this.walletConnectService.checkMetaMaskConnection();
+    this.walletConnectService.isConnected$.subscribe(
+      (res:any) => this.loggedIn = res)
+    this.walletConnectService.walletAccounts$.subscribe(
+      (res:string[]) => this.currentAddress = res[0])
   }
 
-  connectWallet() {
-    console.log('We are connecting a wallet');
+  ngOnInit(): void { }
+
+  // ======================
+  // --- Public Methods ---
+  // ======================
+
+  public connectWallet(): void {
     this.walletConnectService.connectAccount();
+    this.walletConnectService.checkMetaMaskConnection();
+  }
+
+  public copyAddress() {
+    alert(`Copied ${this.currentAddress} to Clipboard`);
+  }
+
+  public async logout() {
+    this.walletConnectService.logout();
   }
 
 }

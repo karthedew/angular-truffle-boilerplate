@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 
-
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
@@ -40,6 +40,7 @@ import { FormsModule } from "@angular/forms";
 
 @NgModule({
     exports: [
+        ClipboardModule,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,
