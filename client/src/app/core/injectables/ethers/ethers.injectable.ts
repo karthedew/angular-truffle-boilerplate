@@ -1,5 +1,6 @@
 import { InjectionToken } from "@angular/core";
-import { ethers, getDefaultProvider, providers } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { ethers, getDefaultProvider, providers, Wallet } from "ethers";
 
 require("dotenv").config()
 
@@ -15,3 +16,17 @@ const KovanWebSocketProvider = new InjectionToken<providers.WebSocketProvider>('
     providedIn: 'root',
     factory: () => new providers.WebSocketProvider(process.env.KOVAN_WSS_URL)
 })
+
+const walletConnectProvider = new InjectionToken<providers.Web3Provider>('Wallet Connect Provider', {
+    providedIn: 'root',
+    factory: () => {
+        const wcProvider = new WalletConnectProvider({
+            infuraId: "my-infura-id",        // required
+            qrcode: true
+        });
+        // await wcProvider.enable();
+        return new providers.Web3Provider(wcProvider)
+    }
+})
+
+const wwalletConnectProvider = new WalletConnectProvider({})

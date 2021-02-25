@@ -34,6 +34,22 @@
             "scripts": []
           },
           "configurations": {
+            "kovan": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kovan.ts"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -69,6 +85,12 @@
             "browserTarget": "angular-truffle-boilerplate:build"
           },
           "configurations": {
+            "kovan": {
+              "browserTarget": "angular-truffle-boilerplate:build:kovan"
+            },
+            "development": {
+              "browserTarget": "angular-truffle-boilerplate:build:development"
+            },
             "production": {
               "browserTarget": "angular-truffle-boilerplate:build:production"
             }

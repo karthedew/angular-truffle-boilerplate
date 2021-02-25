@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { WalletConnectService } from '../../services/wallet-connect/wallet-connect.service';
+
+import Web3Modal from "web3modal";
 
 @Component({
   selector: 'app-toolbar',
@@ -7,13 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private walletConnectService: WalletConnectService
+  ) { }
 
   ngOnInit(): void {
+    let accnts = this.walletConnectService.GetAccounts();
+
+    console.log('The available accounts: ', accnts)
   }
 
   connectWallet() {
-    console.log('We are connecting a wallet')
+    console.log('We are connecting a wallet');
+    this.walletConnectService.connectAccount();
   }
 
 }

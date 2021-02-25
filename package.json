@@ -1,4 +1,9 @@
 {
+    "name": "scaffold-truffle",
+    "version": "0.0.0",
+    "scripts": {
+        "chain": "truffle develop"
+    },
     "dependencies": {
         "@truffle/hdwallet-provider": "^1.2.2",
         "dotenv": "^8.2.0",

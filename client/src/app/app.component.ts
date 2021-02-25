@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Web3 from 'web3';
 
 import { Web3serviceService } from "./core/services/web3/web3service.service";
 
@@ -20,22 +21,39 @@ export class AppComponent {
 
   constructor(private web3Service: Web3serviceService) {
 
-    let accnts = web3Service.getAccounts();
+    this.checkBrowserMetaMask();
 
-    accnts.then((instance) => {
-      console.log(instance)
-      this.account = instance[0];
-    });
+    // let accnts = web3Service.getAccounts();
+
+    // accnts.then((instance) => {
+    //   console.log(instance)
+    //   this.account = instance[0];
+    // });
 
     // console.trace();
 
     // let value = this.getEtherBalance(this.account);
-    let value = web3Service.getEtherBalance(this.account);
+    // let value = web3Service.getEtherBalance(this.account);
 
     // console.trace();
 
-    console.log(web3Service.web3)
+    // console.log(web3Service.web3)
 
+  }
+
+  async checkBrowserMetaMask() {
+    let web3: any;
+
+    if ((window as any).ethereum) {
+      web3 = new Web3(window.ethereum);
+    } else if (window.web3) {
+      web3 = new Web3(window.web3.currentProvider);
+    }
+
+    web3.eth.getAccounts()
+      .then(async (addr: string) => {
+        console.log('The User address: ', addr)
+      })
   }
 
 }

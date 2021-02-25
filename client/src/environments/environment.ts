@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  hostURL: 'http://localhost',
+  INFURA_ID: 'b8bdd09e0e3641279406dde31619dda0'
 };
 
 /*
