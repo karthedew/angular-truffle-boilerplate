@@ -13,10 +13,21 @@ Here are some key features that this box includes:
 The first thing is to install the client node packages.
 
 ```
+npm install
 cd client
 npm install
+npm start
 ```
 
+## Running Different Environments
+
+### Development
+
+Run `npm run dev` to run the development environment.
+
+### Kovan
+
+Run `npm run kovan` to run the development environment that contains the kovan provider and kovan key information.
 
 
 ## Potential Issues
