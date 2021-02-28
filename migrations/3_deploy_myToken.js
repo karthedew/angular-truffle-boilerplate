@@ -1,5 +1,5 @@
-const MyToken = artifacts.require("tokens/myToken")
+const DittoEth = artifacts.require("tokens/DittoEth")
 
 module.exports = function(deployer) {
-  deployer.deploy(MyToken);
+  deployer.deploy(DittoEth);
 };

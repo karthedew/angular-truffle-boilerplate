@@ -1,6 +1,4 @@
-// TODO: 
-
-const MyToken = artifacts.require("myToken");
+const dittoEth = artifacts.require("DittoEth");
 
 
 /**
@@ -14,14 +12,14 @@ const MyToken = artifacts.require("myToken");
  *  - Case #2
  *      > The ``balance`` of the contract should be 0 when deployed.
  */
-contract('[myToken] Basic Contract Features', (accounts) => {
+contract('[dittoEth] Basic Contract Features', (accounts) => {
 
     const owner = accounts[0];
-    var myTokenInstance;
+    var dittoEthInstance;
     // var web3;
 
     before('Setup Contract', async function() {
-        myTokenInstance = await MyToken.deployed();
+        dittoEthInstance = await dittoEth.deployed();
         // web3 = new Web3(ganache.provider());
     })
 
@@ -30,15 +28,15 @@ contract('[myToken] Basic Contract Features', (accounts) => {
     // })
 
     it('Case #1: _totalSupply should be equal to 0', async () => {
-        // const myTokenInstance = await MyToken.deployed();
-        const totalSupply = await myTokenInstance.totalSupply.call();
+        // const dittoEthInstance = await dittoEth.deployed();
+        const totalSupply = await dittoEthInstance.totalSupply.call();
 
         assert.equal(totalSupply, 0, 'The balance should be equal to 1000')
         assert.equal(owner, accounts[0], 'Should have the same owner')
     })
 
     it('Case #2: balance of owner should be 0', async () => {
-        var balance = await myTokenInstance.balanceOf(owner);
+        var balance = await dittoEthInstance.balanceOf(owner);
 
         assert.equal(balance, 0, 'Owner should have the full balance.')
     })
@@ -62,14 +60,14 @@ contract('[myToken] Basic Contract Features', (accounts) => {
  *      > Test requirement, cannot send / request withdrawl of more tokens
  *                          than the sender has in their account.
  */
-contract('[myToken] deposit() function', (accounts) => {
+contract('[dittoEth] deposit() function', (accounts) => {
 
     const owner = accounts[0];
-    var myTokenInstance;
+    var dittoEthInstance;
     // var web3;
 
     before('Setup Contract', async function() {
-        myTokenInstance = await MyToken.deployed();
+        dittoEthInstance = await dittoEth.deployed();
         // web3 = new Web3(ganache.provider());
     })
 
@@ -84,7 +82,7 @@ contract('[myToken] deposit() function', (accounts) => {
         let initialAccountBalance = await web3.eth.getBalance(accounts[1]);
 
         // --- SEND MONEY TO THE DEPOSIT FUNCTION ---
-        let tx = await myTokenInstance.deposit({
+        let tx = await dittoEthInstance.deposit({
             from: accounts[1], 
             value: sendAmount
         });
@@ -104,9 +102,9 @@ contract('[myToken] deposit() function', (accounts) => {
     })
 
     it('Case #2: Check token balance', async () => {
-        let bal = await myTokenInstance.balanceOf(accounts[1]);
+        let bal = await dittoEthInstance.balanceOf(accounts[1]);
 
-        let crtBal = await web3.eth.getBalance(myTokenInstance.address);
+        let crtBal = await web3.eth.getBalance(dittoEthInstance.address);
 
         let actTokenBal = web3.utils.fromWei(bal.toString(), 'ether');
     })
@@ -130,14 +128,14 @@ contract('[myToken] deposit() function', (accounts) => {
  *      > Test requirement, cannot send / request withdrawl of more tokens
  *                          than the sender has in their account.
  */
-contract('[myToken] withdraw() function', (accounts) => {
+contract('[dittoEth] withdraw() function', (accounts) => {
 
     const owner = accounts[0];
-    var myTokenInstance;
+    var dittoEthInstance;
     // var web3;
 
     before('Setup Contract', async function() {
-        myTokenInstance = await MyToken.deployed();
+        dittoEthInstance = await dittoEth.deployed();
         // web3 = new Web3(ganache.provider());
     })
 
@@ -146,9 +144,9 @@ contract('[myToken] withdraw() function', (accounts) => {
     // })
 
     it('Case #1: Testing the withdraw() function', async () => {
-        let bal = await myTokenInstance.balanceOf(accounts[1]);
+        let bal = await dittoEthInstance.balanceOf(accounts[1]);
 
-        let crtBal = await web3.eth.getBalance(myTokenInstance.address);
+        let crtBal = await web3.eth.getBalance(dittoEthInstance.address);
 
         let actTokenBal = web3.utils.fromWei(bal.toString(), 'ether');
     })

@@ -4,7 +4,7 @@ pragma solidity ^0.7.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 
-contract myToken is ERC20, ERC20Burnable {
+contract DittoEth is ERC20, ERC20Burnable {
 
     // NOTE: Rename to DittoEther with Symbol dEth
 
