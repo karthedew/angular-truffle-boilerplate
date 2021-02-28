@@ -14,13 +14,17 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 import { CardComponent } from './core/components/card/card.component';
 import { WalletInformationComponent } from './pages/wallet-information/wallet-information.component';
+import { ChainlinkContractsComponent } from './pages/chainlink-contracts/chainlink-contracts.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     CardComponent,
-    WalletInformationComponent
+    WalletInformationComponent,
+    ChainlinkContractsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

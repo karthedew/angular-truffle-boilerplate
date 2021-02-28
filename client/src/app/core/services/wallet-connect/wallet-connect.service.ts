@@ -33,9 +33,10 @@ export class WalletConnectService {
 
   // --- SUBJECTS & BEHAVIOR SUBJECTS ---
   private accountStatusSource   = new Subject<any>();
-  private isConnectedSource     = new BehaviorSubject<any>(false);
-  private walletAccountsSource  = new BehaviorSubject<any>(['']);
-  private currentProviderSource = new BehaviorSubject<any>('');
+  private isConnectedSource     = new BehaviorSubject<boolean>(false);
+  private walletAccountsSource  = new BehaviorSubject<string[]>(['']);
+  private currentProviderSource = new BehaviorSubject<string>('');
+  private chainIdSource         = new BehaviorSubject<string>('');
 
   // --- OBSERVABLES to BEHAVIOR SUBJECTS ---
   // We want to omit the "next value" to everything that is subscribed to it.
@@ -43,6 +44,7 @@ export class WalletConnectService {
   public isConnected$     = this.isConnectedSource.asObservable();
   public walletAccounts$  = this.walletAccountsSource.asObservable();
   public currentProvider$ = this.currentProviderSource.asObservable();
+  public chainId$         = this.chainIdSource.asObservable();
 
   
 
@@ -90,6 +92,7 @@ export class WalletConnectService {
     this.accountStatusSource.next(this.accounts);
     this.isConnectedSource.next(true);
     this.walletAccountsSource.next(this.accounts);
+    this.getChainId();
   }
 
   public async checkMetaMaskConnection(): Promise<void> {
@@ -104,17 +107,39 @@ export class WalletConnectService {
 
     // --- Get the Accounts from the login ---
     web3.eth.getAccounts()
-      .then(async (addr: string) => {
+      .then(async (addr: string[]) => {
         // Check if address exists.
         if (addr.length != 0) {
           this.walletAccountsSource.next(addr);
           this.isConnectedSource.next(true);
+          this.getChainId();
         }
         
       })
   }
 
+
+  public async getChainId(): Promise<void> {
+    window.ethereum.request({ method: 'eth_chainId' })
+      .then(async (chainId: string) => {
+        let providerName = this.getProviderName(chainId);
+        this.chainIdSource.next(providerName)
+      })
+  }
+
+
+  public changeAccounts(accnt: string[]) {
+    this.walletAccountsSource.next(accnt);
+  }
+
   
+  /*
+  This function is not currently used. 
+
+  MetaMask API does not have a direct way to disconnect a user's
+  connected wallet from a dApp right now. Since there is no clean
+  way to do it, there is no functionality within the dApp.
+  */
   public async logout() {
     await this.web3Modal.clearCachedProvider(); 
     this.isConnectedSource.next(false);
@@ -123,7 +148,7 @@ export class WalletConnectService {
 
 
   // ======================
-  // --- PUBLIC METHODS ---
+  // --- PRIVATE METHODS ---
   // ======================
 
   private getProviderName(chainId: string): string {
@@ -146,6 +171,14 @@ export class WalletConnectService {
 
     if (chainId == '0x2a') {
       return 'Kovan'
+    }
+
+    if (chainId == '0x539') {
+      return 'Ganache'
+    }
+
+    if (chainId == '0x7a69') {
+      return 'Hardhat Node'
     }
 
     else {

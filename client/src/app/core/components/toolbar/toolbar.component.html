@@ -14,11 +14,11 @@
 
         <div *ngIf="loggedIn" class="loggedin-info">
             <div class="item">
-                Kovan
+                {{ chainId }}
             </div>
 
             <div class="toolbar-address item" (click)="copyAddress()">
-                <div [cdkCopyToClipboard]="currentAddress">
+                <div [cdkCopyToClipboard]="currentAddress" style="padding: 0.5rem;">
                     {{ currentAddress }}
                 </div>
             </div>
@@ -39,11 +39,11 @@
             </mat-list-item>
 
             <mat-list-item>
-                <a routerLink="/">Contract #3</a>
+                <a routerLink="/chainlink">Chainlink Contracts</a>
             </mat-list-item>
 
             <mat-list-item>
-                <a routerLink="/walletinfo">Wallet Information</a>
+                <a routerLink="/walletinfo" class="{{myStyle}}">Wallet Information</a>
             </mat-list-item>
         </mat-nav-list>
     </mat-toolbar-row>
