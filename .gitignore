@@ -7,3 +7,4 @@ package-lock.json
 # CLIENT IGNORED FILES
 client/node_modules/*
 client/package-lock.json
+client/src/artifacts/*
