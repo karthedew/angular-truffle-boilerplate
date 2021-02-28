@@ -1,5 +1,6 @@
 const dittoEth = artifacts.require("DittoEth");
 
+// TODO: Need to finish Unit Testing for deposit() and withdraw()
 
 /**
  * GROUP #1: Basic Contract Features
@@ -16,11 +17,9 @@ contract('[dittoEth] Basic Contract Features', (accounts) => {
 
     const owner = accounts[0];
     var dittoEthInstance;
-    // var web3;
 
     before('Setup Contract', async function() {
         dittoEthInstance = await dittoEth.deployed();
-        // web3 = new Web3(ganache.provider());
     })
 
     // beforeEach('Setup global variables', async function() {
@@ -88,6 +87,9 @@ contract('[dittoEth] deposit() function', (accounts) => {
         });
 
         // Get the gas used and convert GWEI TO WEI
+        //  - This has 2 gas fees (x2 operations):
+        //      > Operation #1 for the minting of the new tokens
+        //      > Operation #2 for the transfer to the msg.sender 
         let gasUsed = tx.receipt.gasUsed * 2 * 10000000000;
 
         // --- GET THE ACTUAL ACCOUNT BALANCE ---
