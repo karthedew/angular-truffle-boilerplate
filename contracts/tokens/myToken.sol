@@ -8,56 +8,72 @@ contract myToken is ERC20, ERC20Burnable {
 
     // NOTE: Rename to DittoEther with Symbol dEth
 
-    address owner;
+    address owner;                      // The owner of the contact upon deployment.
+    uint256 fee = 0.005 * 10**18;       // Fee in Wei ( 0.005 ETH ) to account for gas prices upon withdrawl.
 
-    // --- SETUP YOUR EVENTS ---
+    // EVENTS
     event Mint(address indexed to, uint256 amount);
 
-    // --- CALLBACK FUNCTION ---
+
     receive() external payable {}
 
-    // --- THE CONSTRUCTOR ---
     constructor() ERC20("DittoEth", "dEth") {
         owner = msg.sender;
-        _mint(msg.sender, 1000);
+        // _mint(owner,1000);
     }
 
 
+    /**
+     * @dev Mints the equivalent tokens as the amount of ETH sent.
+     *
+     *
+     * Requirements:
+     *
+     *   - Must send a minimum amount of 100000 Wei
+     *
+     */
     function deposit() minimumAmount external payable {
-        // STEP 1 - Validate Sender
-
-        uint256 tt = 20 * 10**18;
-
-        // STEP 2 - Mint tokens equivalent to ETH sent.
-        _mint(msg.sender, tt);
+        // Mint the amount sent.
+        _mint(msg.sender, msg.value);
+        // Emit the minting action.
         emit Mint(msg.sender, msg.value);
-        // STEP 3 - Send equivalent minted tokens to sender.
     }
 
 
-    /*
-    User wants to withdraw funds back to ETH
-    from MyEth coin.
-    */
+    /**
+     * @dev User wants to withdraw funds back to ETH
+     * from MyEth coin.
+     *
+     *
+     * Requirements:
+     *
+     *   - The sender cannot be the owner address
+     *   - The amount requested cannot be greater than 
+     *       the amount available in the smart contract.
+     *   - The sender cannot send more tokens that they have.
+     */
     function withdraw(uint256 amount) external {
 
-        uint256 dexBalance = balanceOf(address(this));
+        uint256 dexBalance    = balanceOf(address(this));
+        uint256 senderBalance = balanceOf(msg.sender);
         
         // --- WHAT IS REQUIRED ---
         require(msg.sender != address(0), "Cannot transfer from the zero address");
         require(amount <= dexBalance, "Cannot request more than the available ETH balance");
+        require(amount <= senderBalance, "Cannot send more than you have");
 
-        // --- Send Token to Smart Contract ---
+        // Transfers the amount of tokens from the sender to the owner
         transfer(owner, amount);
 
         // Check to see if the user sent 
         address(this).transfer(10000);
 
-        // Once we transfer the ETH out, we want to
-        // burn the rest.
+        // Burn the tokens 
+        burnFrom(address(this), amount);
     }
 
-    // --- CREATE A LIST OF REQUIREMENT MODIFIERS ---
+
+    // --- MODIFIERS ---
     modifier minimumAmount {
         require(msg.value > 100000);
         _;
