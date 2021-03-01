@@ -29,4 +29,6 @@ const walletConnectProvider = new InjectionToken<providers.Web3Provider>('Wallet
     }
 })
 
-const wwalletConnectProvider = new WalletConnectProvider({})
+// const walletConnectProvider = new WalletConnectProvider({})
+
+export { MetaMaskProvider, KovanWebSocketProvider, walletConnectProvider }

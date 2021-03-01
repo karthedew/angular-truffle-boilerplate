@@ -16,6 +16,7 @@ import { CardComponent } from './core/components/card/card.component';
 import { WalletInformationComponent } from './pages/wallet-information/wallet-information.component';
 import { ChainlinkContractsComponent } from './pages/chainlink-contracts/chainlink-contracts.component';
 import { HomeComponent } from './pages/home/home.component';
+import { EthStablecoinComponent } from './pages/eth-stablecoin/eth-stablecoin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './pages/home/home.component';
     CardComponent,
     WalletInformationComponent,
     ChainlinkContractsComponent,
-    HomeComponent
+    HomeComponent,
+    EthStablecoinComponent
   ],
   imports: [
     BrowserModule,
