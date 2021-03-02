@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DittoEthInjectable } from 'src/app/core/injectables/contract-injectables/ditto-eth.injectable';
 
 @Component({
   selector: 'app-eth-stablecoin',
@@ -7,9 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EthStablecoinComponent implements OnInit {
 
-  constructor() { }
+  contractName: string;
+  balanceOf: string;
+  contractForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(
+    private dittoEthInjectable: DittoEthInjectable,
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit() {
+    this.contractForm = this.formBuilder.group({
+      balanceOfAddress: ['', [
+        Validators.minLength(42),
+        Validators.maxLength(42)
+      ]]
+    })
+    
+    // Get the Contract name
+    this._getContractName();
+    
+  }
+
+  async getBalanceOf() {
+    this.balanceOf = await this.dittoEthInjectable.balanceOf(this.contractForm.controls['balanceOfAddress'].value);
+  }
+
+  private async _getContractName() {
+    this.contractName = await this.dittoEthInjectable.name();
   }
 
 }
