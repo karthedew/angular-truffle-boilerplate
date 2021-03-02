@@ -8,8 +8,8 @@ import { map } from "rxjs/operators";
 
 declare let require: any;
 declare let window: any;
-const tokenABI = require('./artifacts/MetaCoin.json');
-const contract = require('@truffle/contract');
+// const tokenABI = require('./artifacts/MetaCoin.json');
+// const contract = require('@truffle/contract');
 
 @Component({
   selector: 'app-root',
