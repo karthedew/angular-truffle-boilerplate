@@ -13,8 +13,16 @@ export class DittoEthInjectable extends Contract {
     constructor(
         @Inject(MetaMaskProvider) provider: providers.Web3Provider
     ) {
+        const networkId = Object.keys(DittoEthContract.networks)[0];
+        // console.log('=======================================');
+        // console.log(DittoEthContract.networks['5777'].address);
+        // console.log(Object.keys(DittoEthContract.networks)[0]);
+        // console.log('=======================================');
+
+        // Get the network key to determine what the 
+
         // --- Contract Address ---
-        const dittoEthAddress = "";    // This should come from one of the environment files.
+        const dittoEthAddress = DittoEthContract.networks[networkId].address;    // This should come from one of the environment files.
 
         // --- MetaMask Signer ---
         const signer = provider.getSigner();
