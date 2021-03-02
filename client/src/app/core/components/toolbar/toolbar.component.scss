@@ -40,7 +40,7 @@
     border: 1px solid white;
     border-radius: 10px;
     background-color: black;
-    color: purple;
+    color: slateblue;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
                 rgba(0, 0, 0, 0.12) 0px -12px 30px, 
                 rgba(0, 0, 0, 0.12) 0px 4px 6px, 
@@ -65,5 +65,23 @@ mat-toolbar-row {
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 10px;
+
+        .link {
+            margin: 10px;
+            font-size: small;
+            // border-bottom: 1px solid black;
+            // border-bottom-color: cadetblue;
+            // color:white;
+        }
+
+        .link-active {
+            margin: 10px;
+            border-bottom: 1px solid orange;
+            border-bottom-color: orange;
+            color:orange;
+            // font-weight: bold;
+            font-size: small;
+        }
     }
 }

@@ -30,20 +30,20 @@
     
     <mat-toolbar-row>
         <mat-nav-list>
-            <mat-list-item>
-                <a mat-stroked-button routerLink="/">DeFi Token Aave</a>
+            <mat-list-item class="link" routerLink="/">
+                DeFi Token Aave
             </mat-list-item>
 
-            <mat-list-item>
-                <a mat-stroked-button routerLink="/ethstablecoin">ETH Mintable Stablecoin</a>
+            <mat-list-item class="{{ethstablecoinStyle}}" routerLink="/ethstablecoin">
+                ETH Mintable Stablecoin
             </mat-list-item>
 
-            <mat-list-item>
-                <a mat-stroked-button routerLink="/chainlink">Chainlink Contracts</a>
+            <mat-list-item class="{{chainlinkStyle}}" routerLink="/chainlink">
+                Chainlink Contracts
             </mat-list-item>
 
-            <mat-list-item>
-                <a mat-stroked-button routerLink="/walletinfo" class="{{myStyle}}">Wallet Information</a>
+            <mat-list-item class="{{walletinfoStyle}}" routerLink="/walletinfo">
+                Wallet Information
             </mat-list-item>
         </mat-nav-list>
     </mat-toolbar-row>

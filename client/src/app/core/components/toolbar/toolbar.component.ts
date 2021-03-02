@@ -19,9 +19,11 @@ export class ToolbarComponent implements OnInit {
   currentRoute: string;
   chainId: string;
 
-  walletInfoRoute: string = 'blue';
-  contractRoute: string = "primary";
-  myStyle: string = 'myStyle fromLeft'
+  walletInfoRoute:    string = 'blue';
+  contractRoute:      string = "primary";
+  chainlinkStyle:     string = 'link';
+  ethstablecoinStyle: string = 'link';
+  walletinfoStyle:    string = 'link';
 
 
   constructor(
@@ -50,7 +52,6 @@ export class ToolbarComponent implements OnInit {
 
     // If <chainId> is changed.
     window.ethereum.on('chainChanged', (chainId: any) => {
-      alert(chainId);
       window.location.reload();
     });
   }
@@ -79,17 +80,31 @@ export class ToolbarComponent implements OnInit {
   // =======================
   private styledRoute(): void {
     this.router.events.subscribe(routeEvent => {
-      // console.log('The route change: ', rut);
       if(routeEvent instanceof NavigationEnd) {
-        console.log(routeEvent.url)
         this.currentRoute = routeEvent.url;
         if (routeEvent.url === '/') {
           this.contractRoute = 'accent';
-          this.myStyle = 'myStyle';
+          this.chainlinkStyle = 'link';
+          this.walletinfoStyle = 'link';
+          this.ethstablecoinStyle = 'link';
         }
 
         if (routeEvent.url == '/walletinfo') {
-          this.myStyle = 'myStyle1';
+          this.chainlinkStyle = 'link';
+          this.walletinfoStyle = 'link-active';
+          this.ethstablecoinStyle = 'link';
+        }
+
+        if (routeEvent.url == '/chainlink') {
+          this.chainlinkStyle = 'link-active';
+          this.walletinfoStyle = 'link';
+          this.ethstablecoinStyle = 'link';
+        }
+
+        if (routeEvent.url == '/ethstablecoin') {
+          this.chainlinkStyle = 'link';
+          this.walletinfoStyle = 'link';
+          this.ethstablecoinStyle = 'link-active';
         }
       }
     })
