@@ -11,7 +11,8 @@ export class EthStablecoinComponent implements OnInit {
 
   contractName: string;
   balanceOf: string;
-  contractForm: FormGroup;
+  balanceOfForm: FormGroup;
+  sendTokensForm: FormGroup;
 
   constructor(
     private dittoEthInjectable: DittoEthInjectable,
@@ -19,8 +20,9 @@ export class EthStablecoinComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.contractForm = this.formBuilder.group({
+    this.balanceOfForm = this.formBuilder.group({
       balanceOfAddress: ['', [
+        Validators.required,
         Validators.minLength(42),
         Validators.maxLength(42)
       ]]
@@ -32,7 +34,7 @@ export class EthStablecoinComponent implements OnInit {
   }
 
   async getBalanceOf() {
-    this.balanceOf = await this.dittoEthInjectable.balanceOf(this.contractForm.controls['balanceOfAddress'].value);
+    this.balanceOf = await this.dittoEthInjectable.balanceOf(this.balanceOfForm.controls['balanceOfAddress'].value);
   }
 
   private async _getContractName() {
