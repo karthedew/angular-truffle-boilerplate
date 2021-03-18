@@ -18,6 +18,7 @@ import { WalletInformationComponent }  from './pages/wallet-information/wallet-i
 import { ChainlinkContractsComponent } from './pages/chainlink-contracts/chainlink-contracts.component';
 import { HomeComponent }               from './pages/home/home.component';
 import { EthStablecoinComponent }      from './pages/eth-stablecoin/eth-stablecoin.component';
+import { EthFaucetComponent } from './core/components/eth-faucet/eth-faucet.component';
 
 
 
@@ -30,7 +31,8 @@ import { EthStablecoinComponent }      from './pages/eth-stablecoin/eth-stableco
     WalletInformationComponent,
     ChainlinkContractsComponent,
     HomeComponent,
-    EthStablecoinComponent
+    EthStablecoinComponent,
+    EthFaucetComponent
   ],
   imports: [
     BrowserModule,
