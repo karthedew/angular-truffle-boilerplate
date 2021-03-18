@@ -10,12 +10,17 @@ module.exports = {
   // for more details on how to specify configuration options!
   //
   networks: {
-    development: {
+    ganache: {
       host: "127.0.0.1",
       port: 7545,
       network_id: "*",
       websockets: true
-   },
+    },
+    develop: {
+      host: "127.0.0.1",
+      port: 9545,
+      network_id: "*"
+    },
    kovan: {
      provider: function() {
        // Can replace the Private Key with either a MNEMONIC or list of [ Private Key #1, Private Key #2 ].
