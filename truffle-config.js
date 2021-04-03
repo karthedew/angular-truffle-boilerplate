@@ -28,7 +28,8 @@ module.exports = {
      },
      network_id: 42,
      gasPrice: 20000000000, // 20 GWEI
-     gas: 3716887           // gas limit, set any number you want
+     gas: 3716887,          // gas limit, set any number you want,
+     skipDryRun: true
    }
   },
   // contracts_directory: './contracts',
