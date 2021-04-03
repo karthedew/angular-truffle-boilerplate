@@ -21,10 +21,10 @@ module.exports = {
       port: 9545,
       network_id: "*"
     },
-   kovan: {
-     provider: function() {
-       // Can replace the Private Key with either a MNEMONIC or list of [ Private Key #1, Private Key #2 ].
-       return new HDWalletProvider(process.env.KOVAN_PRIVATE_KEY, process.env.KOVAN_HTTP_URL)
+    kovan: {
+      provider: function() {
+        // Can replace the Private Key with either a MNEMONIC or list of [ Private Key #1, Private Key #2 ].
+        return new HDWalletProvider(process.env.KOVAN_PRIVATE_KEY, process.env.KOVAN_HTTP_URL)
      },
      network_id: 42,
      gasPrice: 20000000000, // 20 GWEI
