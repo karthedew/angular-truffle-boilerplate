@@ -1,0 +1,20 @@
+{
+    "name": "@ang-truff-eth/monorepo",
+    "version": "1.0.0",
+    "keywords": [
+      "ethereum",
+      "angular",
+      "workspaces"
+    ],
+    "private": true,
+    "scripts": {
+      "angular-app:build": "npm workspace @ang-truff-eth/angular build",
+      "angular-app:start": "npm workspace @ang-truff-eth/angular start",
+      "angular-app:test": "npm workspace @ang-truff-eth/angular test"
+    },
+    "workspaces": {
+      "packages": [
+        "packages/*"
+      ]
+    }
+}

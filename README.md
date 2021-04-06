@@ -1,1 +1,1 @@
-* Angular & Truffle Boilerplate
+# Angular & Truffle Boilerplate
