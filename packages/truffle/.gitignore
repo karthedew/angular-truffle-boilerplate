@@ -1,0 +1,8 @@
+build/*
+node_modules/
+.env
+.vscode
+
+# CLIENT IGNORED FILES
+client/node_modules/*
+client/src/app/artifacts/*

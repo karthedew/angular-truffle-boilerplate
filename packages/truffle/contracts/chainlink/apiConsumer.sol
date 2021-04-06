@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.0;
 
-import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
+import "@chainlink/contracts/src/v0.7/ChainlinkClient.sol";
 
 contract apiConsumer is ChainlinkClient {
+
+    using Chainlink for Chainlink.Request;
   
     uint256 public volume;
     
@@ -17,7 +19,7 @@ contract apiConsumer is ChainlinkClient {
      * Job ID: 29fa9aa13bf1468788b7cc4a500a45b8
      * Fee: 0.1 LINK
      */
-    constructor() public {
+    constructor() {
         setPublicChainlinkToken();
         oracle = 0x2f90A6D021db21e1B2A077c5a37B3C7E75D15b7e;
         jobId = "29fa9aa13bf1468788b7cc4a500a45b8";                                                               
@@ -33,8 +35,7 @@ contract apiConsumer is ChainlinkClient {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         
         // Set the URL to perform the GET request on
-        // request.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
-        request.add("get", "https://api.github.com/users/karthedew");
+        request.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
         
         // Set the path to find the desired data in the API response, where the response format is:
         // {"RAW":
@@ -47,7 +48,6 @@ contract apiConsumer is ChainlinkClient {
         //   }
         //  }
         request.add("path", "RAW.ETH.USD.VOLUME24HOUR");
-        request.add("path", "name");
         
         // Multiply the result by 1000000000000000000 to remove decimals
         int timesAmount = 10**18;
@@ -60,7 +60,7 @@ contract apiConsumer is ChainlinkClient {
     function requestGitHubUserInfo(string memory username) public  returns (bytes32 requestId) {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
 
-        request.add("get", abi.encodePacked("https://api.github.com/users/", username));
+        request.add("get", string(abi.encodePacked("https://api.github.com/users/", username)));
 
         request.add("path", "name");
 
