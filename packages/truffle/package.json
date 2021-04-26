@@ -5,9 +5,8 @@
         "chain": "truffle develop",
         "deploy:dev": "truffle migrate --network develop",
         "deploy:truffle": "truffle migrate --network kovan -f 2 --to 2",
-        "fork:mainnet": "ganache-cli --fork https://mainnet.infura.io/v3/%INFURA_MAINNET_KEY%",
-        "fork:kovan": "ganache-cli --fork sed -n 's/KOVAN_HTTP_URL=//p' .env",
-        "fork:test": "sed -n 's/KOVAN_HTTP_URL=//p' .env"
+        "fork:mainnet": "ganache-cli --fork https://mainnet.infura.io/v3/",
+        "fork:kovan": "ganache-cli --fork https://kovan.infura.io/v3/"
     },
     "dependencies": {
         "@chainlink/contracts": "^0.1.6",
