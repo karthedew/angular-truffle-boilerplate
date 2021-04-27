@@ -3,6 +3,9 @@
 
 ## Angular
 
+### Understanding the Angular Environments
+
+
 ### Things to Know
 
 **First**, building a decentralized application with Angular requires the use of ```crypto``` and ```stream```
