@@ -8,6 +8,7 @@
   ],
   "private": true,
   "scripts": {
+    "angular-app:install": "cd packages/angular && npm install",
     "angular-app:build": "npm build --workspace=@ang-truff-eth/angular",
     "angular-app:start": "npm start --workspace=@ang-truff-eth/angular",
     "angular-app:test": "npm test --workspace=@ang-truff-eth/angular",
