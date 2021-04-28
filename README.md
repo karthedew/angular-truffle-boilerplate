@@ -1,12 +1,16 @@
 # Angular & Truffle Boilerplate
 
+## Getting Started
+
+
+
 
 ## Angular
 
 ### Understanding the Angular Environments
 
 
-### Things to Know
+### Things to Know About Angular
 
 **First**, building a decentralized application with Angular requires the use of ```crypto``` and ```stream```
 which are Node.JS build-in APIs. Angular's intent is to serve Angular applications in the browser were
@@ -25,8 +29,7 @@ The problem stems from the *browser.js* file in the @angular-devkit. The solutio
 
 
 **Second**, when building and running Angular in the npm workspace, there are some necessary changes
-required to ensure Angular knows (1) where the node_modules directory and packages are installed, and
-what the root directory the Angular application are located.
+required to ensure Angular knows (1) where the node_modules directory and packages are installed, and (2) what the root directory the Angular application are located.
 
 These should come pre-fixed when you clone this repo, but in case you have any problems, you need to make sure that your **"$schema"** path is in the correct location, that your CSS **"styles"** have the correct 
 directory path, and that your **"root"** directory is from *packages/angular*.
