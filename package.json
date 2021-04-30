@@ -12,7 +12,8 @@
     "angular-app:build": "npm build --workspace=@ang-truff-eth/angular",
     "angular-app:start": "npm start --workspace=@ang-truff-eth/angular",
     "angular-app:test": "npm test --workspace=@ang-truff-eth/angular",
-    "truffle:fork-mainnet": "npm run fork:mainnet --workspace=scaffold-truffle"
+    "truffle:fork-mainnet": "npm run fork:mainnet --workspace=@ang-truff-eth/truffle",
+    "truffle:deploy-dev": "npm run deploy:dev --workspace=@ang-truff-eth/truffle"
   },
   "workspaces": [
     "packages/*"

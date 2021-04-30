@@ -2,7 +2,4 @@ build/*
 node_modules/
 .env
 .vscode
-
-# CLIENT IGNORED FILES
-client/node_modules/*
-client/src/app/artifacts/*
+accounts/ganache_cli_mainnet_keys.json

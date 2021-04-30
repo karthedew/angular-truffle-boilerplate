@@ -1,5 +1,15 @@
 # Angular & Truffle Boilerplate
 
+## Pre-Requisites
+
+Node.js and npm 7+ are required.
+
+```npm install -g ganache-cli```
+
+```npm install -g @angular/cli``` ..not required but recommended.
+
+```npm install -g truffle```
+
 ## Getting Started
 
 
